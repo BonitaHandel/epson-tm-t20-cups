@@ -141,7 +141,7 @@ void ShutDown()
 		outputCommand(cashDrawerEject[0]);
 	if ( settings.cashDrawer2==2 )
 		outputCommand(cashDrawerEject[1]);
-	outputCommand(pageCutCommand);
+	// Cut is now handled in EndPage() for each page
 	outputCommand(printerInitializeCommand);
 }
 
@@ -152,6 +152,7 @@ void EndPage()
 	int i;
 	for (i=0; i<settings.feedDist; ++i)
 		skiplines(0x18);
+	outputCommand(pageCutCommand);
 	signal(15,old_signal);
 }
 
